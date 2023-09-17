@@ -30,22 +30,18 @@ variable "private_subnet" {
   default     = ["10.0.50.0/24", "10.0.60.0/24", "10.0.70.0/24"]
 }
 
-variable "ami_redhat" {
-  type = string
-  description = "Ami for redhat"
-  default = "ami-013d87f7217614e10"
-}
+
 
 variable "imagenes" {
-  type = map(any)
+  type        = map(any)
   description = "Map of images"
   default = {
-    redhat = "ami-013d87f7217614e10"
-    ubuntu = "ami-0a313d6098716f372"
+    redhat  = "ami-013d87f7217614e10"
+    ubuntu  = "ami-0a313d6098716f372"
     windows = "ami-00c896faf296575ab"
   }
 }
-  
+
 
 
 

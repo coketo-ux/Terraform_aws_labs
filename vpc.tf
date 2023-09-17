@@ -1,8 +1,8 @@
 resource "aws_vpc" "main1" {
-  cidr_block = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   tags = {
-    Name = "main1"
+    Name = "Main VPC"
   }
 }
 
@@ -16,10 +16,10 @@ resource "aws_internet_gateway" "igw" {
 
 
 resource "aws_subnet" "subnets_public" {
-  vpc_id            = aws_vpc.main1.id
-  count             = length(data.aws_availability_zones.azs.names)
-  cidr_block        = element(var.public_subnets, count.index)
-  availability_zone = element(data.aws_availability_zones.azs.names, count.index)
+  vpc_id                  = aws_vpc.main1.id
+  count                   = length(data.aws_availability_zones.azs.names)
+  cidr_block              = element(var.public_subnets, count.index)
+  availability_zone       = element(data.aws_availability_zones.azs.names, count.index)
   map_public_ip_on_launch = true
   tags = {
     Name = "subnet_public_${count.index}+1"
@@ -68,9 +68,9 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = -1
-    to_port = -1
-    protocol = "icmp"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
